@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container.banner {
+    position: relative;
+    width: 100%;
+    height: 800px; 
+    margin: 0 auto; 
+    overflow: hidden;
+    background: url('https://gestion.pe/resizer/pXrByCOPlKK43xzwF5lMLWSdJRE=/580x330/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/AC2ETRLG7ZGKDFQYZKS2KGMKQQ.jpg') no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.banner-img {
+    position: absolute;
+    top: 40%; 
+    left: 50%;
+    transform: translate(45%, -0.1%);
+    max-width: 54%; 
+    max-height: 55%; 
+    width: auto; 
+    height: auto; 
+    display: none;
+    border: 10px solid rgb(0, 0, 0); 
+}
+
+
+.banner-img.active {
+    display: block;
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,0 +1,23 @@
+/* Marquee.css */
+.marquee {
+    background-color: #444;
+    padding: 20px; /* Más padding hace que el fondo sea más alto */
+    color: #ccff00; /* Color estilo neón amarillo */
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 30px; /* Letras más grandes */
+    /* Si quieres, puedes agregar una altura específica también */
+    /* height: 60px; */
+}
+
+.marquee span {
+    display: inline-block;
+    position: relative;
+    animation: marquee 70s linear infinite; /* Duración de la animación */
+}
+
+@keyframes marquee {
+    from { transform: translateX(100%); } /* Comienza desde la derecha */
+    to { transform: translateX(-100%); } /* Termina hacia la izquierda */
+}

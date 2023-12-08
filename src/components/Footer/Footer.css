@@ -1,0 +1,62 @@
+/* Footer.css */
+.footer {
+    background-color: #222; /* Color de fondo oscuro */
+    color: white; /* Texto en blanco */
+    padding: 20px 0; /* Espaciado alrededor */
+    font-size: 14px; /* Tamaño del texto */
+  }
+  
+  .footer-container {
+    display: flex; /* Disposición en fila */
+    justify-content: space-evenly; /* Distribución equitativa */
+    margin: 0 auto; /* Centrado */
+    padding: 0 20px; /* Espaciado interno */
+    max-width: 1200px; /* Ancho máximo */
+  }
+  
+  .footer-section {
+    flex: 1; /* Cada sección ocupa el mismo espacio */
+    padding: 10px; /* Espaciado interno */
+  }
+  
+  .footer-section h3 {
+    margin-bottom: 10px; /* Espacio debajo de los títulos */
+    color: #ff1414; /* Color estilo neón verde */
+  }
+  
+  .footer-section ul {
+    list-style: none; /* Sin viñetas */
+    padding: 0; /* Sin espaciado interno */
+  }
+  
+  .footer-section ul li a {
+    color: white; /* Texto en blanco */
+    text-decoration: none; /* Sin subrayado */
+    transition: color 0.3s ease; /* Transición suave del color */
+  }
+  
+  .footer-section ul li a:hover {
+    color: #ccff00; /* Color estilo neón amarillo al pasar el ratón */
+  }
+  
+  .descarga-app {
+    max-width: 100px; /* Tamaño de la imagen */
+    height: auto; /* Altura automática */
+  }
+  
+  .footer-bottom {
+    text-align: center; /* Texto centrado */
+    margin-top: 20px; /* Espacio arriba */
+  }
+  
+  .large-letter {
+    font-size: 16px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+  }
+  
+  .orange-text {
+    color: #ff4500; /* Color naranja */
+  }
+  
+  /* Aquí puedes agregar estilos adicionales según tus necesidades */
+  
