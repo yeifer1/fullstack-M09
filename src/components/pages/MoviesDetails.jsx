@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
 import { MoviesContext } from '../Context/MoviesContext';
 import './MoviesDetails.css';
+import { useNavigate } from 'react-router-dom';
 
 const MoviesDetails = () => {
-    const { movies, incrementLikes, baseURL, agregarAFavoritos } = useContext(MoviesContext);
+    const { movies, incrementLikes, deleteMovie, baseURL } = useContext(MoviesContext);
     const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -12,9 +14,22 @@ const MoviesDetails = () => {
 
     const filteredMovies = searchTerm.length === 0 
         ? movies 
-        : movies.filter(movie => 
-              movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-          );
+        : movies.filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+
+    const handleLikeClick = (movieId, event) => {
+        event.stopPropagation(); // Prevent event bubbling
+        incrementLikes(movieId);
+    };
+
+    const handleDeleteClick = (movieId, event) => {
+        event.stopPropagation(); // Prevent event bubbling
+        deleteMovie(movieId);
+    };
+
+    const goToMovieDetails = (movieId, event) => {
+        event.stopPropagation(); // Prevent event bubbling
+        navigate(`/movie/${movieId}`);
+    };
 
     return (
         <div>
@@ -32,19 +47,20 @@ const MoviesDetails = () => {
                         <img 
                             className="card-poster" 
                             src={`${baseURL}${movie.poster_path}`} 
-                            alt={`Póster de ${movie.title}`} 
+                            alt={`Póster de ${movie.title}`}
+                            onClick={(event) => goToMovieDetails(movie._id, event)}
                         />
-                        <div className="card-content">
-                            <h3 className="movie-title">{movie.title} ({movie.releaseYear})</h3>
-                            <p className="movie-director">Director: {movie.director}</p>
-                            <button className="like-button" onClick={() => incrementLikes(movie._id)}>
-                                <span className="like-icon">👍</span>
-                                <span className="likes-count">{movie.likes}</span>
-                            </button>
-                           <button className="like-button" onClick={() => agregarAFavoritos(movie)}>
-    ❤️ Agregar a mis favoritos
-</button>
-
+                        <div className="card-content" onClick={(event) => goToMovieDetails(movie._id, event)}>
+                            <h3 className="movie-title">{movie.title}</h3>
+                            <div className="card-actions">
+                                <button className="like-button" onClick={(event) => handleLikeClick(movie._id, event)}>
+                                    <span className="like-icon">👍</span>
+                                    <span className="likes-count">{movie.likes}</span>
+                                </button>
+                                <button className="delete-button" onClick={(event) => handleDeleteClick(movie._id, event)}>
+                                    🗑️ Eliminar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 ))}

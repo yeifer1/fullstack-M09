@@ -7,7 +7,8 @@ import RegisterForm from '../pages/RegisterForm';
 import LoginForm from '../pages/LoginForm';
 import Secret from '../pages/Secret';
 import Dashboard from '../pages/Dashboard';
-import MisFavoritos from '../pages/MisFavoritos';
+
+import AddMovieForm from '../pages/AddMovieForm';
 
 
 
@@ -25,7 +26,7 @@ const RouteIndex = () => {
         }
       />
       
-      <Route path="/mis-favoritos" element={<MisFavoritos />} />
+      <Route path="/mis-favoritos" element={<AddMovieForm/>} />
       <Route path="/cartelera" element={<Cartelera />} />
       <Route path="/movie/:movieId" element={<MovieDetailsPage />} />
       <Route path='/secret' element={<Secret />} />
