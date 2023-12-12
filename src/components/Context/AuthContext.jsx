@@ -1,51 +1,58 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState, useEffect } from 'react'
-import { jwtDecode } from 'jwt-decode';
+import { createContext, useState, useEffect } from 'react';
+import jwtDecode from 'jwt-decode'; // Corregido
 
-
-
-const AuthContext = createContext()
-
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(false) 
-  const [userPayload, setUserPayload] = useState(null) 
+  const [isAuth, setIsAuth] = useState(false);
+  const [userPayload, setUserPayload] = useState(null);
+
+  const decodeToken = (token) => {
+    if (token && token.split('.').length === 3) {
+      try {
+        return jwtDecode(token);
+      } catch (error) {
+        console.error("Error al decodificar el token:", error);
+      }
+    } else {
+      console.error("Token inválido o faltante");
+    }
+    return null;
+  };
 
   const login = (token) => {
-    localStorage.setItem('token', token) 
-    const decodedPayload = jwtDecode(token)
-    setUserPayload(decodedPayload)
-    setIsAuth(true)
-  }
+    localStorage.setItem('token', token);
+    const decodedPayload = decodeToken(token);
+    if (decodedPayload) {
+      setUserPayload(decodedPayload);
+      setIsAuth(true);
+    }
+  };
 
   const logout = () => {
-    localStorage.removeItem('token') 
-    setUserPayload(null) 
-    setIsAuth(false) 
-  }
+    localStorage.removeItem('token');
+    setUserPayload(null);
+    setIsAuth(false);
+  };
 
- 
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      const decodedPayload = jwtDecode(token)
-      setUserPayload(decodedPayload)
-      setIsAuth(true)
+    const token = localStorage.getItem('token');
+    const decodedPayload = decodeToken(token);
+    if (decodedPayload) {
+      setUserPayload(decodedPayload);
+      setIsAuth(true);
     }
-  }, [])
+  }, []);
 
   const values = {
     isAuth,
     userPayload,
     login,
-    logout
-  }
+    logout,
+  };
 
-  return (
-    <AuthContext.Provider value={values}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
+};
 
-export { AuthProvider, AuthContext }
+export { AuthProvider, AuthContext };
