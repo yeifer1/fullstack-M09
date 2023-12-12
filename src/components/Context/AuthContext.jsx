@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from 'react';
-import jwtDecode from 'jwt-decode'; // Corregido
+import jwtDecode from 'jwt-decode'; // Importación corregida
 
 const AuthContext = createContext();
 
