@@ -1,3 +1,5 @@
+
+
 .container {
     max-width: 1200px;
     margin: 0 auto; 
@@ -17,7 +19,7 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 0;  
     left: 0;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -38,9 +40,13 @@
 
 
 .movie-card {
-    position: relative; /* Asegúrate de que el .movie-card sea relativo para posicionar los elementos internos */
-    overflow: hidden; /* Esto asegura que todo lo que se desborde se oculte */
-    transition: transform 0.3s ease-in-out;
+    background-color: #181818;
+    color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
 }
 
 
@@ -56,78 +62,31 @@
 }
 
 .card-poster {
-    width: 100%; /* asegúrate de que la imagen cubra el ancho */
-    display: block; /* elimina el espacio extra debajo de la imagen */
-    /* altura ya definida y object-fit de estilos existentes */
+    width: 100%;
+    height: 400px; /* Ajusta la altura según necesites */
+    object-fit: cover;
 }
 
 .card-content {
-    /* No más position: absolute; */
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    padding: 15px;
+    text-align: center;
+    flex-grow: 1; /* Permite que este elemento ocupe el espacio restante */
 }
 
-.card-actions {
-    width: 100%; /* Opcional: dependiendo de cómo quieres que se muestren los botones */
-    display: flex;
-    justify-content: space-evenly; /* Esto separará los botones uniformemente */
-    padding: 10px 0; /* Espacio arriba y abajo de los botones */
-}
-/* Ajusta los estilos para los botones y el título */
-.movie-title, .like-button, .delete-button {
-    margin-bottom: 10px; /* Espacio debajo de cada elemento */
-    z-index: 2; /* Asegúrate de que estén sobre cualquier otro contenido */
-    display: flex; /* Usa flexbox para alinear los íconos y el texto dentro de los botones */
-    justify-content: center; /* Centra el contenido de los botones */
-}
-
-.movie-title, .like-button {
-    display: block; 
-    z-index: 2; 
-    position: relative; 
-}
-
-
-/* Estilos para botones similares a los de Netflix */
-.like-button, .delete-button {
-    background-color: #e50914; /* Color rojo distintivo de Netflix */
+/* Botones */
+.card-actions button {
+    background-color: #e50914;
     color: white;
     border: none;
-    border-radius: 2px; /* Bordes ligeramente redondeados */
-    padding: 10px 20px; /* Padding generoso para un look más amplio */
+    border-radius: 4px;
+    padding: 10px 15px;
     cursor: pointer;
-    font-weight: bold; /* Texto en negrita */
-    font-size: 16px; /* Tamaño de fuente más grande */
-    text-transform: uppercase; /* Texto en mayúsculas */
-    display: inline-flex; /* Usa flexbox para alinear íconos y texto */
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease-in-out, background-color 0.2s;
-    text-decoration: none; /* Sin subrayado */
-    margin: 0 5px; /* Margen entre botones */
+    margin-right: 10px;
+    font-size: 16px;
+    transition: background-color 0.2s;
 }
 
-.like-button:hover, .delete-button:hover {
-    background-color: #f40612; /* Un rojo ligeramente más oscuro al pasar el mouse */
-    transform: scale(1.05); /* Un ligero aumento de tamaño al pasar el mouse */
-}
-
-/* Ajustes para el contenedor de botones para mejor espaciado */
-.card-actions {
-    display: flex;
-    justify-content: space-around; /* Distribuye el espacio alrededor de los botones */
-    margin-top: 10px; /* Espacio arriba de los botones */
-}
-
-/* Ajustes para los íconos dentro de los botones si los usas */
-.like-icon, .delete-icon {
-    margin-right: 8px; /* Espacio a la derecha del ícono */
-}
+/* Ajusta los estilos para los botones y el título */
 
 
 

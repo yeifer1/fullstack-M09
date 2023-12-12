@@ -41,7 +41,7 @@ const MoviesDetails = () => {
                     onChange={handleSearchChange}
                 />
             </div>
-            <div className="movies-container">
+            <div className="movies-container"> 
                 {filteredMovies.map((movie) => (
                     <div key={movie._id} className="movie-card">
                         <img 

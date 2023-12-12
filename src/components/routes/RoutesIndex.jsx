@@ -16,14 +16,16 @@ const RouteIndex = () => {
   const { isAuth } = useAuthContext(); 
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={
+      isAuth
+      ?
+      <Home />
+      :
+      <Navigate to='/login' replace />
+    } />
+    :
       <Route
-        path='/dashboard'
-        element={
-          isAuth
-            ? <Dashboard />
-            : <Navigate to='/login' replace />
-        }
+        path='/dashboard'element={<Dashboard/> }
       />
       
       <Route path="/mis-favoritos" element={<AddMovieForm/>} />

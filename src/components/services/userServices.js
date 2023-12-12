@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://ecommerce-json-jwt.onrender.com'
+const BASE_URL = 'https://tame-yoke-moth.cyclic.app/api'
 
 // Referencia: https://stackoverflow.com/questions/71989146/axios-instance-not-getting-the-token-from-local-storage-on-first-call-react-js
 // Si existe un token, inyectalo en la cabecera de la petición
@@ -18,8 +18,8 @@ axios.interceptors.request.use(
   }
 )
 
-const registerUserService = (data) => axios.post(`${BASE_URL}/register`, data)
-const loginUserService = (data) => axios.post(`${BASE_URL}/login`, data)
+const registerUserService = (data) => axios.post(`${BASE_URL}/users/register`, data)
+const loginUserService = (data) => axios.post(`${BASE_URL}/users/login`, data)
 const getSingleUserService = (id) => axios.get(`${BASE_URL}/users/${id}`)
 const getMeUserService = () => axios.get(`${BASE_URL}/me`)
 

@@ -1,48 +1,55 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import  { createContext, useContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
-// Crear el contexto MoviesContext
 export const MoviesContext = createContext();
 
 export const MoviesProvider = ({ children }) => {
-  const [movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState([]);
+    const baseURL = 'https://image.tmdb.org/t/p/original';
 
-  // Definir la función para agregar películas
-  const addMovieToCatalog = async (formData) => {
-    try {
-      // Realizar una solicitud POST a tu API para agregar la película a la base de datos
-      const response = await fetch('/api/movies', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    useEffect(() => {
+        fetch('/api/movies')
+            .then(res => res.json())
+            .then(data => setMovies(data))
+            .catch(error => console.error('Error al cargar películas:', error));
+    }, []);
 
-      if (response.status === 201) {
-        // La película se agregó con éxito
-        const newMovie = await response.json();
-        setMovies([...movies, newMovie]);
-      } else {
-        // Manejo de errores en caso de que la solicitud no sea exitosa
-        console.error('Error al agregar la película');
-        throw new Error('Error al agregar la película');
-      }
-    } catch (error) {
-      console.error('Error de red:', error);
-      throw error;
-    }
-  };
+    const incrementLikes = async (movieId) => {
+        const response = await fetch(`/api/movies/${movieId}/like`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+        });
 
-  const value = {
-    movies,
-    addMovieToCatalog, // Asegúrate de incluir la función en el contexto
-  };
+        if (response.ok) {
+            const updatedMovie = await response.json();
+            setMovies(movies.map(movie => movie._id === movieId ? updatedMovie : movie));
+        } else {
+            console.error('No se pudo incrementar el like de la película');
+        }
+    };
 
-  return (
-    <MoviesContext.Provider value={value}>
-      {children}
-    </MoviesContext.Provider>
-  );
+    const deleteMovie = async (movieId) => {
+        const response = await fetch(`/api/movies/${movieId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            setMovies(movies.filter(movie => movie._id !== movieId));
+        } else {
+            console.error('No se pudo eliminar la película');
+        }
+    };
+
+    const value = {
+        movies,
+        incrementLikes,
+        deleteMovie,
+        baseURL
+    };
+
+    return (
+        <MoviesContext.Provider value={value}>
+            {children}
+        </MoviesContext.Provider>
+    );
 };

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://ecommerce-json-jwt.onrender.com'
+const BASE_URL = 'https://tame-yoke-moth.cyclic.app'
 
 // https://stackoverflow.com/questions/71989146/axios-instance-not-getting-the-token-from-local-storage-on-first-call-react-js
 axios.interceptors.request.use((config) => {
@@ -14,8 +14,8 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error)
 })
 
-const getSingleItem = (id) => axios.get(`${BASE_URL}/items/${id}`)
-const getAllItems = () => axios.get(`${BASE_URL}/items`)
+const getSingleItem = (id) => axios.get(`${BASE_URL}/api/movie${id}`)
+const getAllItems = () => axios.get(`${BASE_URL}/api/movies`)
 
 export {
   getSingleItem,
