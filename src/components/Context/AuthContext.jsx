@@ -41,11 +41,11 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log("Token recuperado de localStorage:", token);
+    console.log("Token recuperado de localStorage:", token); // Para verificar si hay un token
     if (token) {
       decodeToken(token);
     } else {
-      console.log("No se encontró token en localStorage");
+      console.log("No se encontró token en localStorage, el usuario no está autenticado");
       setIsAuth(false);
     }
   }, []);
