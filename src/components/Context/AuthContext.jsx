@@ -1,63 +1,53 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
-import { createContext, useState, useEffect } from 'react';
-import {jwtDecode} from 'jwt-decode';
-
-const AuthContext = createContext();
-
-const AuthProvider = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(false);
-  const [userPayload, setUserPayload] = useState();
-
-  const decodeToken = (token) => {
-    if (token && token.split('.').length === 3) {
-      try {
-        const decoded = jwtDecode(token);
-        console.log("Token decodificado:", decoded);
-        setUserPayload(decoded);
-        setIsAuth(true);
-      } catch (error) {
-        console.error("Error al decodificar el token:", error);
-        logout();
-      }
-    } else {
-      console.error("Token inválido o faltante");
-      logout();
-    }
-  };
-
+// useState -> un estado que me diga si estoy logeado
+// useEffecct -> para revisar si hay un token y me lo cargue a mi estado
+import { createContext, useState, useEffect } from 'react'
+import { jwtDecode } from 'jwt-decode'
+// * 1) Crear el contexto
+const AuthContext = createContext() // va a empezar vacío mi contexto
+//* 2). Crear el proveedor del contexto, es decir maneja de donde se obtiene la información
+// El proveedor es un componente que va a envolver a todos los componentes
+// eslint-disable-next-line react/prop-types
+function AuthProvider ({ children }) {
+  const [isAuth, setIsAuth] = useState(false) // ¿Estoy autenticado/logeado? si o no
+  // ¿Como decodificamos el payload?
+  const [userPayload, setUserPayload] = useState(null) // jwt payload decodificado - datos del usuario
   const login = (token) => {
-    localStorage.setItem('token', token);
-    console.log("Token guardado en localStorage:", token);
-    decodeToken(token);
-  };
-
+    // guardamos el token en el localStorage del navegador
+    // este dato permance aún si el navegador se cierra y se vuelve a abrir.
+    localStorage.setItem('token', token)
+    const decode = jwtDecode(token) // decodifica el payload del token
+    setUserPayload(decode)
+    setIsAuth(true) // ya iniciamos sesión? SI
+  }
   const logout = () => {
-    localStorage.removeItem('token');
-    console.log("Usuario deslogueado, token removido de localStorage");
-    setUserPayload(null);
-    setIsAuth(false);
-  };
-
+    // Eliminamos el token del localStorage del navegador
+    localStorage.removeItem('token')
+    setUserPayload(null) // borro el payload del estado
+    setIsAuth(false) // Cerramos sesión / estoy deslogeado.
+  }
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    console.log("Token recuperado de localStorage:", token); // Para verificar si hay un token
+    // RECUPERAR EL TOKEN DEL LOCALSTORAGE, si no existe devolvera null
+    const token = localStorage.getItem('token') // para cuperar token es getItem, para guardar es setItem
     if (token) {
-      decodeToken(token);
-    } else {
-      console.log("No se encontró token en localStorage, el usuario no está autenticado");
-      setIsAuth(false);
+      const decode = jwtDecode(token) // decodifica el payload del token
+      setUserPayload(decode)
+      setIsAuth(true)
     }
-  }, []);
-
-  const values = {
+  }, [])
+  // mandamos el objeto
+  const data = {
     isAuth,
     userPayload,
     login,
-    logout,
-  };
-
-  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
-};
-
-export { AuthProvider, AuthContext };
+    logout
+  }
+  // el provider es un componente que envuelve a otros componentes
+  return (
+  // return de un componente
+  // value es el contexto que va a compartir entre todos los componentes
+    <AuthContext.Provider value={data}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+export { AuthContext, AuthProvider }
