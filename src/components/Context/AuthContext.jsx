@@ -7,7 +7,7 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [userPayload, setUserPayload] = useState(null);
+  const [userPayload, setUserPayload] = useState();
 
   const decodeToken = (token) => {
     if (token && token.split('.').length === 3) {
