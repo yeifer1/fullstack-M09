@@ -18,7 +18,7 @@ axios.interceptors.request.use(
   }
 )
 
-const registerUserService = (data) => axios.post(`${BASE_URL}/api/users/register`, data)
+const registerUserService = (data) => axios.post(`${BASE_URL}api/users/register`, data)
 const loginUserService = (data) => axios.post(`${BASE_URL}/api/users/login`, data)
 const getSingleUserService = (id) => axios.get(`${BASE_URL}/api/users/${id}`)
 const getMeUserService = () => axios.get(`${BASE_URL}/api/me`)
