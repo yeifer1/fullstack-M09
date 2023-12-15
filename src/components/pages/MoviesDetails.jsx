@@ -14,7 +14,9 @@ const MoviesDetails = () => {
 
     const filteredMovies = searchTerm.length === 0 
         ? movies 
-        : movies.filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+        : Array.isArray(movies) // Verifica si 'movies' es un array
+            ? movies.filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase()))
+            : []; // Devuelve un array vacío si 'movies' no es un array
 
     const handleLikeClick = (movieId, event) => {
         event.stopPropagation(); // Prevent event bubbling

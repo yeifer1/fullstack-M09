@@ -1,53 +1,50 @@
-// useState -> un estado que me diga si estoy logeado
-// useEffecct -> para revisar si hay un token y me lo cargue a mi estado
+/* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from 'react'
-import { jwtDecode } from 'jwt-decode'
-// * 1) Crear el contexto
-const AuthContext = createContext() // va a empezar vacío mi contexto
-//* 2). Crear el proveedor del contexto, es decir maneja de donde se obtiene la información
-// El proveedor es un componente que va a envolver a todos los componentes
-// eslint-disable-next-line react/prop-types
-function AuthProvider ({ children }) {
-  const [isAuth, setIsAuth] = useState(false) // ¿Estoy autenticado/logeado? si o no
-  // ¿Como decodificamos el payload?
-  const [userPayload, setUserPayload] = useState(null) // jwt payload decodificado - datos del usuario
+import {jwtDecode} from 'jwt-decode'
+
+// #1 Crear el contexto
+const AuthContext = createContext()
+
+// #2 Crear el Proveedor del contexto (provider)
+const AuthProvider = ({ children }) => {
+  const [isAuth, setIsAuth] = useState(false) // ¿Estoy autenticado?
+  const [userPayload, setUserPayload] = useState(null) // JWT Payload decodificado
+
   const login = (token) => {
-    // guardamos el token en el localStorage del navegador
-    // este dato permance aún si el navegador se cierra y se vuelve a abrir.
-    localStorage.setItem('token', token)
-    const decode = jwtDecode(token) // decodifica el payload del token
-    setUserPayload(decode)
-    setIsAuth(true) // ya iniciamos sesión? SI
+    localStorage.setItem('token', token) // Guardamos el token en el localStorage
+    const decodedPayload = jwtDecode(token)
+    setUserPayload(decodedPayload)
+    setIsAuth(true)
   }
+
   const logout = () => {
-    // Eliminamos el token del localStorage del navegador
-    localStorage.removeItem('token')
-    setUserPayload(null) // borro el payload del estado
-    setIsAuth(false) // Cerramos sesión / estoy deslogeado.
+    localStorage.removeItem('token') // Borro el token del localStorage
+    setUserPayload(null) // Borro el payload del estado
+    setIsAuth(false) // Estoy deslogeado
   }
+
+  // Si el token existe en el localStorage, lo recupero y establezco los estados correspondientes en mi aplicación
   useEffect(() => {
-    // RECUPERAR EL TOKEN DEL LOCALSTORAGE, si no existe devolvera null
-    const token = localStorage.getItem('token') // para cuperar token es getItem, para guardar es setItem
+    const token = localStorage.getItem('token')
     if (token) {
-      const decode = jwtDecode(token) // decodifica el payload del token
-      setUserPayload(decode)
+      const decodedPayload = jwtDecode(token)
+      setUserPayload(decodedPayload)
       setIsAuth(true)
     }
   }, [])
-  // mandamos el objeto
-  const data = {
+
+  const values = {
     isAuth,
     userPayload,
     login,
     logout
   }
-  // el provider es un componente que envuelve a otros componentes
+
   return (
-  // return de un componente
-  // value es el contexto que va a compartir entre todos los componentes
-    <AuthContext.Provider value={data}>
+    <AuthContext.Provider value={values}>
       {children}
     </AuthContext.Provider>
   )
 }
-export { AuthContext, AuthProvider }
+
+export { AuthProvider, AuthContext }
