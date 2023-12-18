@@ -1,6 +1,6 @@
 // Cartelera.jsx
 import  { useContext } from 'react';
-import { MoviesContext } from '../Context/MoviesContext';
+import { MoviesContext } from '../../Context/MoviesContext';
 import './Cartelera.css';
 import { useNavigate } from 'react-router-dom'; // Importa useNavigate para la navegación
 import Navbar from "../Navbar/Navbar"

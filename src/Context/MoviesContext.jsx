@@ -1,33 +1,27 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from 'react'
+import { getAllItems } from '../services/moviesServices'
 
 export const MoviesContext = createContext()
 
 export const MoviesProvider = ({ children }) => {
   const [movies, setMovies] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
   const baseURL = 'https://image.tmdb.org/t/p/original'
 
+  const fetchMovie = async () => {
+    try {
+      const response = await getAllItems()
+      if (response.status === 200) {
+        setMovies(response.data.results)
+        setIsLoading(false)
+      }
+    } catch (error) {
+      console.log('Fetch Error:', error)
+    }
+  }
   useEffect(() => {
-    setIsLoading(true)
-    setError(null)
-    fetch('/api/movies')
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Error al cargar películas')
-        }
-        return res.json()
-      })
-      .then(data => {
-        setMovies(data)
-        setIsLoading(false)
-      })
-      .catch(error => {
-        console.error('Error al cargar películas:', error)
-        setError(error.message)
-        setIsLoading(false)
-      })
+    fetchMovie()
   }, [])
 
   const incrementLikes = async (movieId) => {
@@ -69,8 +63,8 @@ export const MoviesProvider = ({ children }) => {
     incrementLikes,
     deleteMovie,
     baseURL,
-    isLoading,
-    error
+    isLoading
+
   }
 
   return (

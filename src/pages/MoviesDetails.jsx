@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { MoviesContext } from '../Context/MoviesContext'
+import { MoviesContext } from '../../Context/MoviesContext'
 import './MoviesDetails.css'
 import { useNavigate } from 'react-router-dom'
 

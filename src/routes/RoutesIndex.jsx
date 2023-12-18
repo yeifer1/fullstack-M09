@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthContext } from '../hook/useAuthContext'
-import Home from '../home/Home'
+import { useAuthContext } from '../components/hook/useAuthContext'
+import Home from '../pages/home/Home'
 import Cartelera from '../pages/Cartelera'
 import MovieDetailsPage from '../pages/MovieDetailsPage'
 import RegisterForm from '../pages/RegisterForm'

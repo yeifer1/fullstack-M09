@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { MoviesContext } from '../Context/MoviesContext';
+import { MoviesContext } from '../../Context/MoviesContext';
 import Navbar from "../Navbar/Navbar"
 import './MovieDetailsPage.css';
 
