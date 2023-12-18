@@ -52,26 +52,26 @@ const LoginForm = () => {
           <input
             type='email'
             className='form-control'
-            id='floatingInput'
-            placeholder='name@example.com'
+            id='email'
             name='email'
             value={input.email}
             onChange={handleInputChange}
+            placeholder='name@example.com'
           />
-          <label htmlFor='floatingInput'>Email address</label>
+          <label htmlFor='email'>Email address</label>
         </div>
 
-        <div className='form-floating'>
+          <div className='form-floating'>
           <input
             type='password'
             className='form-control'
-            id='floatingPassword'
-            placeholder='Password'
+            id='password'
             name='password'
             value={input.password}
             onChange={handleInputChange}
+            placeholder='Password'
           />
-          <label htmlFor='floatingPassword'>Password</label>
+          <label htmlFor='password'>Password</label>
         </div>
 
         <button className='btn btn-primary w-100 py-2' type='submit'>
