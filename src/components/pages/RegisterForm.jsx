@@ -12,12 +12,11 @@ const RegisterForm = () => {
 
   // Paso 1: crear un objeto con valores iniciales:
   const datos = {
-    first_name: '',
-    last_name: '',
-    gender: '',
+    
+    name: '',
     email: '',
     password: '',
-    pais:"",
+  
 
   }
 
