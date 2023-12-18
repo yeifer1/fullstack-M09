@@ -12,7 +12,7 @@ const RegisterForm = () => {
 
   // Paso 1: crear un objeto con valores iniciales:
   const datos = {
-    
+
     name: '',
     email: '',
     password: '',
@@ -53,44 +53,17 @@ const RegisterForm = () => {
           <input
             type='text'
             className='form-control'
-            id='first_name'
-            name='first_name'
-            value={input.first_name}
+            id='name'
+            name='name'
+            value={input.name}
             onChange={handleInputChange}
             placeholder='name'
           />
           <label htmlFor='first_name'>First Name</label>
         </div>
 
-        <div className='form-floating'>
-          <input
-            type='text'
-            className='form-control'
-            id='last_name'
-            name='last_name'
-            value={input.last_name}
-            onChange={handleInputChange}
-            placeholder='last name'
-          />
-          <label htmlFor='last_name'>Last Name</label>
-        </div>
-
-        <div className='form-floating'>
-          <select
-            className='form-select'
-            id='gender'
-            name='gender'
-            value={input.gender}
-            onChange={handleInputChange}
-          >
-            <option value=''>Choose...</option>
-            <option value='M'>Male</option>
-            <option value='F'>Female</option>
-       
-          </select>
+      
           
-          <label htmlFor='gender'>Gender</label>
-        </div>
 
         <div className='form-floating'>
           <input
