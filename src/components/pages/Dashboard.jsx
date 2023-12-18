@@ -27,11 +27,9 @@ const Dashboard = () => {
     <>
       <Navbar />
       <div className="dashboard-container">
-        <h1 className="dashboard-title">Bienvenid@, {userData.first_name} {userData.last_name}</h1>
+        <h1 className="dashboard-title">Bienvenid@, {userData.name}</h1>
         <div className="dashboard-info">
-          {userData?.first_name && <h2>Nombre: {userData.first_name}</h2>}
-          {userData?.last_name && <h2>Apellido: {userData.last_name}</h2>}
-          {userData?.gender && <h2>Género: {userData.gender}</h2>}
+          {userData?.first_name && <h2>Nombre: {userData.name}</h2>}
           {userData?.email && <h2>Email: {userData.email}</h2>}
         </div>
       </div>
