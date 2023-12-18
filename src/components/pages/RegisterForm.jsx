@@ -27,7 +27,9 @@ const RegisterForm = () => {
       const response = await registerUserService(data)
       if (response.status === 201) {
         console.log('Usuario creado exitosamente')
+        console.log(response)
         navigate('/login')
+        
       }
     } catch (error) {
       console.error('Ocurrio un error en Signup', error.message)
