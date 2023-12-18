@@ -4,7 +4,7 @@ import './Navbar.css' // Asegúrate de tener este archivo para los estilos
 // Importa la imagen correctamente. Asegúrate de que la ruta sea correcta.
 import logoBoleto from './logoBoleto.png' // Asegúrate de que la ruta sea correcta.
 import { NavLink } from 'react-router-dom'
-import { useAuthContext } from '../hook/useAuthContext'
+import { useAuthContext } from '../../hook/useAuthContext'
 const Navbar = () => {
   const { isAuth, logout } = useAuthContext()
 

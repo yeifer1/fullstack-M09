@@ -2,8 +2,8 @@ import useForm from '../hook/useForm'
 import { useAuthContext } from '../hook/useAuthContext'
 import { useNavigate } from 'react-router-dom'
 import { loginUserService } from '../services/userServices'
-import Navbar from '../Navbar/Navbar'
-import './LoginForm.css'
+import Navbar from '../components/Navbar/Navbar'
+import '../styles/LoginForm.css'
 const LoginForm = () => {
   const { login } = useAuthContext()
 

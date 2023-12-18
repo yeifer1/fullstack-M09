@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useAuthContext } from '../hook/useAuthContext'
 import { getMeUserService } from '../services/userServices.js'
-import Navbar from '../Navbar/Navbar'
-import Footer from '../Footer/Footer.jsx'
-import './Dashboard.css'
+import Navbar from '../components/Navbar/Navbar.jsx'
+import Footer from '../components/Footer/Footer.jsx'
+import '../styles/Dashboard.css'
 
 const Dashboard = () => {
   const { userPayload } = useAuthContext()

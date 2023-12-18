@@ -1,8 +1,8 @@
-import { MoviesProvider } from './components/Context/MoviesContext'
-import { AuthProvider } from './components/Context/AuthContext'
+import { MoviesProvider } from './Context/MoviesContext'
+import { AuthProvider } from './Context/AuthContext'
 import { BrowserRouter } from 'react-router-dom'
-import RoutesIndex from './components/routes/RoutesIndex'
-import Navbar from './components/Navbar/Navbar'
+import RoutesIndex from './routes/RoutesIndex'
+// import Navbar from './components/Navbar/Navbar'
 
 function App () {
   return (
@@ -10,7 +10,7 @@ function App () {
       <MoviesProvider>
         <AuthProvider>
           <BrowserRouter>
-            <Navbar />
+
             <RoutesIndex />
           </BrowserRouter>
         </AuthProvider>

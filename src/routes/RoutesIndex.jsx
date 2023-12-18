@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAuthContext } from '../components/hook/useAuthContext'
+import { useAuthContext } from '../hook/useAuthContext'
 import Home from '../pages/Home'
 import Cartelera from '../pages/Cartelera'
 import MovieDetailsPage from '../pages/MovieDetailsPage'
@@ -24,7 +24,7 @@ const RouteIndex = () => {
       />
 
       <Route path='/Dashboard' element={<Dashboard />} />
-      <Route path='/mis-favoritos' element={<AddMovieForm />} />
+      <Route path='/crear' element={<AddMovieForm />} />
       <Route path='/cartelera' element={<Cartelera />} />
       <Route path='/movie/:movieId' element={<MovieDetailsPage />} />
       <Route path='/secret' element={<Secret />} />

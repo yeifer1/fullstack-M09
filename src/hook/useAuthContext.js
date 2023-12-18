@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { AuthContext } from '../../Context/AuthContext'
+import { AuthContext } from '../Context/AuthContext'
 
 // Paso 3. Crear un hook para usar el contexto
 

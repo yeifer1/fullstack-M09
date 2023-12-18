@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState, useEffect } from 'react'
-import { getAllItems } from '../services/moviesServices'
 
 export const MoviesContext = createContext()
 
@@ -9,26 +8,42 @@ export const MoviesProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const baseURL = 'https://image.tmdb.org/t/p/original'
 
-  const fetchMovie = async () => {
+  const fetchMovies = async () => {
+    setIsLoading(true)
+    // Obtiene el token del almacenamiento local
+    const token = localStorage.getItem('token')
     try {
-      const response = await getAllItems()
-      if (response.status === 200) {
-        setMovies(response.data.results)
-        setIsLoading(false)
+      const response = await fetch('https://magenta-dragonfly-coat.cyclic.app/api/movies', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` // Incluye el token en el encabezado de autorización
+        }
+      })
+      if (!response.ok) {
+        throw new Error('No se pudo obtener los datos de la API')
       }
+      const data = await response.json()
+      setMovies(data) // Asumiendo que la respuesta es un array de películas
     } catch (error) {
-      console.log('Fetch Error:', error)
+      console.error('Fetch Error:', error)
     }
+    setIsLoading(false)
   }
+
   useEffect(() => {
-    fetchMovie()
+    fetchMovies()
   }, [])
 
   const incrementLikes = async (movieId) => {
+    const token = localStorage.getItem('token') // Obtiene el token del almacenamiento local
     try {
-      const response = await fetch(`/api/movies/${movieId}/like`, {
+      const response = await fetch(`https://magenta-dragonfly-coat.cyclic.app/api/movies/${movieId}/like`, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` // Incluye el token en el encabezado de autorización
+        }
       })
 
       if (!response.ok) {
@@ -43,15 +58,21 @@ export const MoviesProvider = ({ children }) => {
   }
 
   const deleteMovie = async (movieId) => {
+    const token = localStorage.getItem('token') // Obtiene el token del almacenamiento local
     try {
-      const response = await fetch(`/api/movies/${movieId}`, {
-        method: 'DELETE'
+      const response = await fetch(`https://magenta-dragonfly-coat.cyclic.app/api/movies/${movieId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}` // Incluye el token en el encabezado de autorización
+        }
       })
 
       if (!response.ok) {
         throw new Error('No se pudo eliminar la película')
       }
 
+      // Actualiza el estado de las películas después de eliminar una
       setMovies(movies.filter(movie => movie._id !== movieId))
     } catch (error) {
       console.error(error)
@@ -64,7 +85,6 @@ export const MoviesProvider = ({ children }) => {
     deleteMovie,
     baseURL,
     isLoading
-
   }
 
   return (

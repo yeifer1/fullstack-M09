@@ -1,9 +1,9 @@
 import useForm from '../hook/useForm'
 import { useNavigate } from 'react-router-dom'
 import { registerUserService } from '../services/userServices'
-import Navbar from '../Navbar/Navbar'
-import './RegisterForm.css'
-import logoBoleto from '../Navbar/logoBoleto.png'
+import Navbar from '../components/Navbar/Navbar'
+import '../styles/RegisterForm.css'
+import logoBoleto from '../components/Navbar/logoBoleto.png'
 
 const RegisterForm = () => {
   // usamos el hook useNavigate para redireccionar al usuario
