@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://tame-yoke-moth.cyclic.app'
+const BASE_URL = 'https://magenta-dragonfly-coat.cyclic.app'
 
 // Referencia: https://stackoverflow.com/questions/71989146/axios-instance-not-getting-the-token-from-local-storage-on-first-call-react-js
 // Si existe un token, inyectalo en la cabecera de la petición
