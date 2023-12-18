@@ -20,6 +20,9 @@ const Navbar = () => {
                </div>
 
               
+           <div className='logaot'>
+           <Link to="/">logaot</Link>
+               </div>
            
                 <div className='login'>
                 <Link to={"/login"}>Login</Link > 
